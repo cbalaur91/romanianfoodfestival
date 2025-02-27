@@ -1,0 +1,193 @@
+---
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+interface GalleryImage {
+  year: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const images: GalleryImage[] = [
+  {
+    year: '2024',
+    src: 'https://images.unsplash.com/photo-1547573854-74d2a71d0826?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2024 - Traditional Food Display',
+    width: 800,
+    height: 600
+  },
+  {
+    year: '2024',
+    src: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2024 - Traditional Dishes',
+    width: 800,
+    height: 600
+  },
+  {
+    year: '2023',
+    src: 'https://images.unsplash.com/photo-1533777857889-4be7c70b33f7?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2023 - Traditional Dance Performance',
+    width: 800,
+    height: 600
+  },
+  {
+    year: '2023',
+    src: 'https://images.unsplash.com/photo-1601059286029-afef2b53efc6?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2023 - Folk Music Performance',
+    width: 800,
+    height: 600
+  },
+  {
+    year: '2023',
+    src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2023 - Community Feast',
+    width: 800,
+    height: 600
+  },
+  {
+    year: '2022',
+    src: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2022 - Community Gathering',
+    width: 800,
+    height: 600
+  },
+  {
+    year: '2022',
+    src: 'https://images.unsplash.com/photo-1516685018646-549198525c1b?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2022 - Traditional Costumes',
+    width: 800,
+    height: 600
+  },
+  {
+    year: '2022',
+    src: 'https://images.unsplash.com/photo-1519690889869-e705e59f72e1?w=800&h=600&fit=crop',
+    alt: 'Romanian Food Festival 2022 - Cultural Celebration',
+    width: 800,
+    height: 600
+  }
+];
+
+const years = ['2024', '2023', '2022'];
+---
+
+<section id="gallery" class="py-20 bg-section-gradient">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl font-display font-bold bg-gradient-to-r from-secondary via-primary to-tertiary bg-clip-text text-transparent text-center mb-12">
+      Festival Gallery
+    </h2>
+    
+    <div class="mb-8">
+      <div class="flex justify-center gap-4 mb-8">
+        {years.map(year => (
+          <button class={`gallery-filter px-6 py-2 rounded-full border-2 border-primary transition-all duration-300 backdrop-blur-sm ${
+            year === '2024' ? 'bg-primary text-dark font-bold scale-110' : 'text-primary hover:bg-primary/20'
+          }`} data-year={year}>{year}</button>
+        ))}
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="swiper gallery-swiper">
+        <div class="swiper-wrapper">
+          {images.map(image => (
+            <div class="swiper-slide" data-year={image.year}>
+              <div class="relative aspect-video overflow-hidden rounded-lg shadow-xl">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  width={image.width}
+                  height={image.height}
+                  class="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #FFD700 !important;
+  }
+
+  .swiper-pagination-bullet {
+    background: #FFD700 !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #FFD700 !important;
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, A11y } from 'swiper/modules';
+
+  // Initialize Swiper
+  const swiper = new Swiper('.gallery-swiper', {
+    modules: [Navigation, Pagination, A11y],
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+
+  const filterButtons = document.querySelectorAll('.gallery-filter');
+  const slides = document.querySelectorAll('.swiper-slide');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const year = button.getAttribute('data-year');
+
+      filterButtons.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-dark', 'font-bold', 'scale-110');
+        btn.classList.add('text-primary', 'hover:bg-primary/20');
+      });
+      button.classList.remove('text-primary', 'hover:bg-primary/20');
+      button.classList.add('bg-primary', 'text-dark', 'font-bold', 'scale-110');
+
+      slides.forEach(slide => {
+        const slideYear = slide.getAttribute('data-year');
+        if (year === slideYear) {
+          slide.style.display = 'block';
+        } else {
+          slide.style.display = 'none';
+        }
+      });
+
+      swiper.update();
+      swiper.slideTo(0);
+    });
+  });
+
+  // Show 2024 images by default
+  window.addEventListener('DOMContentLoaded', () => {
+    slides.forEach(slide => {
+      const slideYear = slide.getAttribute('data-year');
+      if (slideYear === '2024') {
+          slide.style.display = 'block';
+        } else {
+          slide.style.display = 'none';
+        }
+    });
+    swiper.update();
+  });
+</script>

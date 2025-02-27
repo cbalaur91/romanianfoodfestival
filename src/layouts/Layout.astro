@@ -1,0 +1,48 @@
+---
+import '@fontsource/playfair-display/400.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title = "Romanian Food Festival - Rochester Hills, MI",
+  description = "Join us for authentic Romanian cuisine, culture, and traditions at the Romanian Food Festival in Rochester Hills, Michigan. Experience delicious food, live music, and family fun!"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={Astro.url} />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+	</head>
+	<body class="bg-dark text-white font-sans">
+		<slot />
+	</body>
+</html>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

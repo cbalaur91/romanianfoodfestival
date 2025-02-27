@@ -1,0 +1,50 @@
+---
+---
+<header class="fixed w-full bg-dark/90 backdrop-blur-sm z-50">
+  <nav class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <a href="/" class="text-2xl font-display font-bold text-primary">
+        Romanian Food Festival
+      </a>
+      <div class="hidden md:flex space-x-8">
+        <a href="#about" class="text-white hover:text-primary transition-colors">About</a>
+        <a href="#menu" class="text-white hover:text-primary transition-colors">Menu</a>
+        <a href="#schedule" class="text-white hover:text-primary transition-colors">Schedule</a>
+        <a href="#gallery" class="text-white hover:text-primary transition-colors">Gallery</a>
+        <a href="#location" class="text-white hover:text-primary transition-colors">Location</a>
+        <a href="#sponsors" class="text-white hover:text-primary transition-colors">Sponsors</a>
+      </div>
+      <button class="md:hidden text-white" id="menu-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="flex flex-col space-y-4 pt-4 pb-3">
+        <a href="#about" class="text-white hover:text-primary transition-colors">About</a>
+        <a href="#menu" class="text-white hover:text-primary transition-colors">Menu</a>
+        <a href="#schedule" class="text-white hover:text-primary transition-colors">Schedule</a>
+        <a href="#location" class="text-white hover:text-primary transition-colors">Location</a>
+        <a href="#gallery" class="text-white hover:text-primary transition-colors">Gallery</a>
+        <a href="#sponsors" class="text-white hover:text-primary transition-colors">Sponsors</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('#mobile-menu a');
+
+  menuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>
