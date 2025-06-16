@@ -1,0 +1,163 @@
+'use client';
+
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Eye } from 'lucide-react';
+import Image from 'next/image';
+
+// Map dish names to actual food images
+const dishImages: { [key: string]: string } = {
+  'Mici': '/Food/22.jpg',
+  'Sarmale': '/Food/28.jpg',
+  'Mititei': '/Food/26.jpg',
+  'Ciorbă de Burtă': '/Food/28.jpg',
+  'Ciorbă de Fasole': '/Food/43.jpg',
+  'Miel la Proțap': '/Food/22.jpg',
+  'Mămăligă': '/Food/23.jpg',
+  'Salată de Icre': '/Food/26.jpg',
+  'Salată Orientală': '/Food/28.jpg',
+  'Murături': '/Food/43.jpg',
+  'Papanași': '/Food/22.jpg',
+  'Cozonac': '/Food/23.jpg',
+  'Clătite': '/Food/26.jpg',
+  'Înghețată': '/Food/28.jpg',
+  'Țuică': '/Food/43.jpg',
+  'Pălincă': '/Food/22.jpg',
+  'Romanian Wine': '/Food/23.jpg',
+  'Socată': '/Food/26.jpg',
+  'Coffee & Tea': '/Food/28.jpg'
+};
+
+const menuCategories = [
+  {
+    name: 'Main Dishes',
+    items: [
+      { name: 'Mici', description: 'Grilled seasoned meat rolls', price: '$12', popular: true },
+      { name: 'Sarmale', description: 'Cabbage rolls with meat and rice', price: '$15', popular: true },
+      { name: 'Mititei', description: 'Small grilled meat sausages', price: '$10' },
+      { name: 'Ciorbă de Burtă', description: 'Traditional tripe soup', price: '$10' },
+      { name: 'Ciorbă de Fasole', description: 'Bean soup with smoked meat', price: '$9' },
+      { name: 'Miel la Proțap', description: 'Roasted lamb with herbs', price: '$18' },
+    ]
+  },
+  {
+    name: 'Side Dishes',
+    items: [
+      { name: 'Mămăligă', description: 'Traditional cornmeal porridge', price: '$5' },
+      { name: 'Salată de Icre', description: 'Fish roe salad', price: '$7' },
+      { name: 'Salată Orientală', description: 'Mixed vegetable salad', price: '$6' },
+      { name: 'Murături', description: 'Pickled vegetables', price: '$4' },
+    ]
+  },
+  {
+    name: 'Desserts',
+    items: [
+      { name: 'Papanași', description: 'Sweet doughnuts with cream and jam', price: '$8', popular: true },
+      { name: 'Cozonac', description: 'Sweet bread with walnuts', price: '$6' },
+      { name: 'Clătite', description: 'Romanian crepes with jam', price: '$7' },
+      { name: 'Înghețată', description: 'Homemade ice cream', price: '$5' },
+    ]
+  },
+  {
+    name: 'Beverages',
+    items: [
+      { name: 'Țuică', description: 'Traditional plum brandy', price: '$8' },
+      { name: 'Pălincă', description: 'Fruit brandy', price: '$10' },
+      { name: 'Romanian Wine', description: 'Selection of Romanian wines', price: '$7' },
+      { name: 'Socată', description: 'Traditional elderflower drink', price: '$4' },
+      { name: 'Coffee & Tea', description: 'Romanian coffee and herbal teas', price: '$3' },
+    ]
+  }
+];
+
+export function FoodMenu() {
+  const [selectedDish, setSelectedDish] = useState<string | null>(null);
+
+  const openImageModal = (dishName: string) => {
+    setSelectedDish(dishName);
+  };
+
+  const closeImageModal = () => {
+    setSelectedDish(null);
+  };
+
+  return (
+    <div className="space-y-8" id="menu">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold text-romanian-blue mb-4">
+          Authentic Romanian Menu
+        </h2>
+        <p className="text-gray-600 max-w-3xl mx-auto">
+          Our menu features traditional Romanian dishes prepared with authentic recipes 
+          passed down through generations. Each dish is made with care using fresh, 
+          high-quality ingredients to ensure an authentic taste of Romania.
+        </p>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-8">
+        {menuCategories.map((category) => (
+          <Card key={category.name} className="h-fit">
+            <CardHeader>
+              <CardTitle className="text-xl text-romanian-blue flex items-center gap-2">
+                {category.name}
+                <span className="h-px bg-romanian-yellow flex-1" />
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {category.items.map((item) => (
+                <div key={item.name} className="flex justify-between items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h4 className="font-semibold text-gray-900">{item.name}</h4>
+                      {item.popular && (
+                        <Badge variant="secondary" className="bg-romanian-yellow text-romanian-blue">
+                          Popular
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-sm text-gray-600 mb-2">{item.description}</p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => openImageModal(item.name)}
+                      className="text-xs"
+                    >
+                      <Eye className="w-3 h-3 mr-1" />
+                      View Image
+                    </Button>
+                  </div>
+                  <span className="font-bold text-romanian-red whitespace-nowrap">
+                    {item.price}
+                  </span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Image Modal */}
+      <Dialog open={selectedDish !== null} onOpenChange={closeImageModal}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl text-romanian-blue">
+              {selectedDish}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="relative aspect-video rounded-lg overflow-hidden">
+            <Image
+              src={selectedDish ? (dishImages[selectedDish] || '/Food/22.jpg') : '/Food/22.jpg'}
+              alt={selectedDish ? `${selectedDish} - Traditional Romanian dish` : 'Traditional Romanian food'}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
