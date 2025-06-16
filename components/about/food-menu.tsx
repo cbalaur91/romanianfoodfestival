@@ -10,24 +10,20 @@ import Image from 'next/image';
 
 // Map dish names to actual food images
 const dishImages: { [key: string]: string } = {
-  'Mici': '/Food/22.jpg',
+  'Mici': '/Food/26.jpg',
+  'Carnati': '/Food/22.jpg',
   'Sarmale': '/Food/28.jpg',
-  'Mititei': '/Food/26.jpg',
   'Ciorbă de Burtă': '/Food/28.jpg',
   'Ciorbă de Fasole': '/Food/43.jpg',
-  'Miel la Proțap': '/Food/22.jpg',
   'Mămăligă': '/Food/23.jpg',
   'Salată de Icre': '/Food/26.jpg',
-  'Salată Orientală': '/Food/28.jpg',
   'Murături': '/Food/43.jpg',
   'Papanași': '/Food/22.jpg',
-  'Cozonac': '/Food/23.jpg',
+  'Kurtos Kalacs': '/Food/22.jpg',
   'Clătite': '/Food/26.jpg',
-  'Înghețată': '/Food/28.jpg',
   'Țuică': '/Food/43.jpg',
   'Pălincă': '/Food/22.jpg',
   'Romanian Wine': '/Food/23.jpg',
-  'Socată': '/Food/26.jpg',
   'Coffee & Tea': '/Food/28.jpg'
 };
 
@@ -36,11 +32,10 @@ const menuCategories = [
     name: 'Main Dishes',
     items: [
       { name: 'Mici', description: 'Grilled seasoned meat rolls', price: '$12', popular: true },
+      { name: 'Carnati', description: 'Romanian sausage', price: '$18' },
       { name: 'Sarmale', description: 'Cabbage rolls with meat and rice', price: '$15', popular: true },
-      { name: 'Mititei', description: 'Small grilled meat sausages', price: '$10' },
       { name: 'Ciorbă de Burtă', description: 'Traditional tripe soup', price: '$10' },
       { name: 'Ciorbă de Fasole', description: 'Bean soup with smoked meat', price: '$9' },
-      { name: 'Miel la Proțap', description: 'Roasted lamb with herbs', price: '$18' },
     ]
   },
   {
@@ -48,17 +43,16 @@ const menuCategories = [
     items: [
       { name: 'Mămăligă', description: 'Traditional cornmeal porridge', price: '$5' },
       { name: 'Salată de Icre', description: 'Fish roe salad', price: '$7' },
-      { name: 'Salată Orientală', description: 'Mixed vegetable salad', price: '$6' },
       { name: 'Murături', description: 'Pickled vegetables', price: '$4' },
+      { name: 'Cartofi Prajiti', description: 'French fries', price: '$9' },
     ]
   },
   {
     name: 'Desserts',
     items: [
       { name: 'Papanași', description: 'Sweet doughnuts with cream and jam', price: '$8', popular: true },
-      { name: 'Cozonac', description: 'Sweet bread with walnuts', price: '$6' },
-      { name: 'Clătite', description: 'Romanian crepes with jam', price: '$7' },
-      { name: 'Înghețată', description: 'Homemade ice cream', price: '$5' },
+      { name: 'Langoși cu brânză', description: 'Sweet bread with cheese', price: '$6' },
+      { name: 'Kurtos Kalacs', description: 'Chimney cake', price: '$7' },
     ]
   },
   {
@@ -67,7 +61,7 @@ const menuCategories = [
       { name: 'Țuică', description: 'Traditional plum brandy', price: '$8' },
       { name: 'Pălincă', description: 'Fruit brandy', price: '$10' },
       { name: 'Romanian Wine', description: 'Selection of Romanian wines', price: '$7' },
-      { name: 'Socată', description: 'Traditional elderflower drink', price: '$4' },
+      { name: 'Bere', description: 'Romanian beer', price: '$9' },
       { name: 'Coffee & Tea', description: 'Romanian coffee and herbal teas', price: '$3' },
     ]
   }
