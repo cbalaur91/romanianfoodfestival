@@ -16,7 +16,7 @@ export default function ContactPage() {
           </h1>
           <p className="text-xl max-w-3xl mx-auto">
             Have questions about the festival? Need more information? 
-            We'd love to hear from you and help make your visit memorable.
+            We&apos;d love to hear from you and help make your visit memorable.
           </p>
         </div>
       </div>

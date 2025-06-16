@@ -31,7 +31,7 @@ export function Sponsorship() {
           <p className="mb-6">
             Ready to support the Romanian Food Festival and gain valuable exposure for your business? 
             Download our sponsorship contract to learn about the benefits and opportunities available. 
-            We're excited to partner with you!
+            We&apos;re excited to partner with you!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="secondary" size="lg">

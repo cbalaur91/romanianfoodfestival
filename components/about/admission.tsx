@@ -61,7 +61,7 @@ export function Admission() {
                 </div>
                 <div className="flex justify-between">
                   <span>1:00 PM</span>
-                  <span>Children's Activities</span>
+                  <span>Children&apos;s Activities</span>
                 </div>
                 <div className="flex justify-between">
                   <span>2:00 PM</span>

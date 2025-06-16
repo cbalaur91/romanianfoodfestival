@@ -61,7 +61,7 @@ export function SponsorsBanner() {
             Our Valued Sponsors
           </h3>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We're grateful to our sponsors who help make the Romanian Food Festival possible. 
+            We&apos;re grateful to our sponsors who help make the Romanian Food Festival possible. 
             Click on any logo to visit their website and learn more about their services.
           </p>
         </div>

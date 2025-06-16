@@ -101,7 +101,7 @@ export function FestivalInfo() {
             wanted to share their cultural heritage with the broader Rochester Hills community.
           </p>
           <p className="text-gray-600">
-            What started as a modest event in the church hall has grown into one of Michigan's most 
+            What started as a modest event in the church hall has grown into one of Michigan&apos;s most 
             anticipated cultural festivals, attracting visitors from across the Midwest who come to 
             experience authentic Romanian cuisine, music, and traditions.
           </p>

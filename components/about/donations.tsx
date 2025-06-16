@@ -8,7 +8,7 @@ const impactAreas = [
   {
     icon: GraduationCap,
     title: 'New Classrooms',
-    description: 'Building dedicated spaces for children\'s religious education and spiritual growth.',
+    description: 'Building dedicated spaces for children&apos;s religious education and spiritual growth.',
     impact: 'Provides a nurturing environment for our young ones to grow in faith'
   },
   {
@@ -70,7 +70,7 @@ export function Donations() {
           Building Our Future
         </h2>
         <p className="text-gray-600 max-w-4xl mx-auto text-lg leading-relaxed mb-6">
-          Our parish is embarking on a crucial mission to build new classrooms dedicated to children's religious studies. 
+          Our parish is embarking on a crucial mission to build new classrooms dedicated to children&apos;s religious studies. 
           These spaces will provide a nurturing environment where our young ones can grow in faith, knowledge, and community. 
           Your support will directly contribute to shaping the spiritual foundation of our future generations.
         </p>
@@ -168,7 +168,7 @@ export function Donations() {
             <div className="bg-white rounded-lg p-6 text-center">
               <GraduationCap className="w-16 h-16 text-romanian-blue mx-auto mb-4" />
               <h4 className="text-lg font-semibold text-romanian-blue mb-2">
-                Building Tomorrow's Faith Leaders
+                Building Tomorrow&apos;s Faith Leaders
               </h4>
               <p className="text-gray-600 text-sm">
                 Your donation helps create spaces where children can develop a strong 
