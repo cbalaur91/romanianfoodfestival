@@ -50,7 +50,7 @@ export function Sponsorship() {
         <CardContent className="space-y-4">
           <div className="grid md:grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-3xl font-bold text-romanian-red mb-2">5,000+</div>
+              <div className="text-3xl font-bold text-romanian-red mb-2">2,000+</div>
               <p className="text-sm text-gray-600">Annual Visitors</p>
             </div>
             <div className="text-center">
@@ -58,7 +58,7 @@ export function Sponsorship() {
               <p className="text-sm text-gray-600">of Exposure</p>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-romanian-red mb-2">20+</div>
+              <div className="text-3xl font-bold text-romanian-red mb-2">10+</div>
               <p className="text-sm text-gray-600">Years of Tradition</p>
             </div>
           </div>

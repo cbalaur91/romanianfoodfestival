@@ -8,7 +8,7 @@ const impactAreas = [
   {
     icon: GraduationCap,
     title: 'New Classrooms',
-    description: 'Building dedicated spaces for children&apos;s religious education and spiritual growth.',
+    description: 'Building dedicated spaces for children\'s religious education and spiritual growth.',
     impact: 'Provides a nurturing environment for our young ones to grow in faith'
   },
   {

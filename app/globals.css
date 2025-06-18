@@ -115,6 +115,13 @@
     background-color: rgb(var(--romanian-red));
   }
   
+  .bg-romanian-flag {
+    background: linear-gradient(to right, 
+      rgb(var(--romanian-blue)) 0% 33.33%, 
+      rgb(var(--romanian-yellow)) 33.33% 66.67%, 
+      rgb(var(--romanian-red)) 66.67% 100%);
+  }
+  
   .smooth-scroll {
     scroll-behavior: smooth;
   }

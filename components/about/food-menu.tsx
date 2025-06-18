@@ -31,38 +31,38 @@ const menuCategories = [
   {
     name: 'Main Dishes',
     items: [
-      { name: 'Mici', description: 'Grilled seasoned meat rolls', price: '$12', popular: true },
-      { name: 'Carnati', description: 'Romanian sausage', price: '$18' },
-      { name: 'Sarmale', description: 'Cabbage rolls with meat and rice', price: '$15', popular: true },
-      { name: 'Ciorbă de Burtă', description: 'Traditional tripe soup', price: '$10' },
-      { name: 'Ciorbă de Fasole', description: 'Bean soup with smoked meat', price: '$9' },
+      { name: 'Mici', description: 'Grilled seasoned meat rolls', price: '', popular: true },
+      { name: 'Carnati', description: 'Romanian sausage', price: '' },
+      { name: 'Sarmale', description: 'Cabbage rolls with meat and rice', price: '', popular: true },
+      { name: 'Ciorbă de Burtă', description: 'Traditional tripe soup', price: '' },
+      { name: 'Ciorbă de Fasole', description: 'Bean soup with smoked meat', price: '' },
     ]
   },
   {
     name: 'Side Dishes',
     items: [
-      { name: 'Mămăligă', description: 'Traditional cornmeal porridge', price: '$5' },
-      { name: 'Salată de Icre', description: 'Fish roe salad', price: '$7' },
-      { name: 'Murături', description: 'Pickled vegetables', price: '$4' },
-      { name: 'Cartofi Prajiti', description: 'French fries', price: '$9' },
+      { name: 'Mămăligă', description: 'Traditional cornmeal porridge', price: '' },
+      { name: 'Salată de Icre', description: 'Fish roe salad', price: '' },
+      { name: 'Murături', description: 'Pickled vegetables', price: '' },
+      { name: 'Cartofi Prajiti', description: 'French fries', price: '' },
     ]
   },
   {
     name: 'Desserts',
     items: [
-      { name: 'Papanași', description: 'Sweet doughnuts with cream and jam', price: '$8', popular: true },
-      { name: 'Langoși cu brânză', description: 'Sweet bread with cheese', price: '$6' },
-      { name: 'Kurtos Kalacs', description: 'Chimney cake', price: '$7' },
+      { name: 'Papanași', description: 'Sweet doughnuts with cream and jam', price: '', popular: true },
+      { name: 'Langoși cu brânză', description: 'Sweet bread with cheese', price: '' },
+      { name: 'Kurtos Kalacs', description: 'Chimney cake', price: '' },
     ]
   },
   {
     name: 'Beverages',
     items: [
-      { name: 'Țuică', description: 'Traditional plum brandy', price: '$8' },
-      { name: 'Pălincă', description: 'Fruit brandy', price: '$10' },
-      { name: 'Romanian Wine', description: 'Selection of Romanian wines', price: '$7' },
-      { name: 'Bere', description: 'Romanian beer', price: '$9' },
-      { name: 'Coffee & Tea', description: 'Romanian coffee and herbal teas', price: '$3' },
+      { name: 'Țuică', description: 'Traditional plum brandy', price: '' },
+      { name: 'Pălincă', description: 'Fruit brandy', price: '' },
+      { name: 'Romanian Wine', description: 'Selection of Romanian wines', price: '' },
+      { name: 'Bere', description: 'Romanian beer', price: '' },
+      { name: 'Coffee & Tea', description: 'Romanian coffee and herbal teas', price: '' },
     ]
   }
 ];
