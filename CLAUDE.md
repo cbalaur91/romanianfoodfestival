@@ -5,9 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 - `npm run dev` - Start development server
-- `npm run build` - Build production bundle
+- `npm run build` - Build production bundle  
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+- `npm run analyze` - Build with bundle analyzer enabled
 
 ## Architecture
 
@@ -45,3 +46,14 @@ Components follow shadcn/ui patterns with:
 
 ### shadcn/ui Configuration
 The project uses shadcn/ui with default styling and CSS variables. Components are configured in `components.json` with path aliases for easy imports.
+
+### Path Aliases
+- `@/components` - Component imports
+- `@/lib` - Utility functions  
+- `@/hooks` - Custom React hooks
+- `@/ui` - shadcn/ui components
+
+### Build Configuration
+- Bundle analyzer available via `npm run analyze`
+- ESLint errors ignored during builds for deployment
+- Next.js 15 App Router with TypeScript strict mode

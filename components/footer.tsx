@@ -51,6 +51,15 @@ export function Footer() {
               >
                 <Facebook className="w-4 h-4" />
               </a>
+              <a
+                href="https://www.instagram.com/rofoodfestival?igsh=MWI4ZWNnN2FzZmFqdA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-romanian-blue text-white rounded-full hover:bg-opacity-80 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
             </div>
             <p className="text-sm text-gray-600">
               Follow us for the latest updates on the Romanian Food Festival and community events.
