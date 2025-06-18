@@ -125,6 +125,107 @@
   .smooth-scroll {
     scroll-behavior: smooth;
   }
+  
+  .text-shadow-strong {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .traditional-pattern {
+    background-image: 
+      /* Romanian flower motifs */
+      radial-gradient(ellipse 8px 12px at 50% 50%, rgba(var(--romanian-red), 0.6) 40%, transparent 50%),
+      radial-gradient(circle 3px at 50% 30%, rgba(var(--romanian-yellow), 0.8), transparent),
+      radial-gradient(circle 3px at 30% 70%, rgba(var(--romanian-blue), 0.7), transparent),
+      radial-gradient(circle 3px at 70% 70%, rgba(var(--romanian-red), 0.7), transparent),
+      
+      /* Traditional diamond/rhombus patterns */
+      linear-gradient(45deg, transparent 35%, rgba(var(--romanian-blue), 0.3) 40%, rgba(var(--romanian-blue), 0.3) 60%, transparent 65%),
+      linear-gradient(-45deg, transparent 35%, rgba(var(--romanian-yellow), 0.25) 40%, rgba(var(--romanian-yellow), 0.25) 60%, transparent 65%),
+      
+      /* Cross-stitch pattern */
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(var(--romanian-red), 0.15) 2px, rgba(var(--romanian-red), 0.15) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(var(--romanian-blue), 0.1) 2px, rgba(var(--romanian-blue), 0.1) 4px),
+      
+      /* Larger floral medallions */
+      radial-gradient(circle 15px at 50% 50%, transparent 8px, rgba(var(--romanian-red), 0.4) 9px, rgba(var(--romanian-red), 0.4) 11px, transparent 12px),
+      radial-gradient(circle 12px at 50% 50%, transparent 5px, rgba(var(--romanian-yellow), 0.5) 6px, rgba(var(--romanian-yellow), 0.5) 8px, transparent 9px);
+      
+    background-size: 
+      60px 60px,
+      60px 60px, 
+      60px 60px, 
+      60px 60px,
+      40px 40px,
+      40px 40px,
+      20px 20px,
+      20px 20px,
+      120px 120px,
+      120px 120px;
+      
+    background-position: 
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      20px 20px,
+      20px 20px,
+      0 0,
+      0 0,
+      60px 60px,
+      60px 60px;
+  }
+  
+  .romanian-embroidery-overlay {
+    background-image:
+      /* Traditional Romanian star/flower pattern */
+      conic-gradient(from 0deg at 50% 50%, 
+        transparent 0deg, 
+        rgba(var(--romanian-red), 0.4) 30deg, 
+        transparent 60deg, 
+        rgba(var(--romanian-blue), 0.3) 90deg, 
+        transparent 120deg, 
+        rgba(var(--romanian-yellow), 0.4) 150deg, 
+        transparent 180deg, 
+        rgba(var(--romanian-red), 0.3) 210deg, 
+        transparent 240deg, 
+        rgba(var(--romanian-blue), 0.4) 270deg, 
+        transparent 300deg, 
+        rgba(var(--romanian-yellow), 0.3) 330deg, 
+        transparent 360deg),
+        
+      /* Overlapping geometric patterns */
+      repeating-conic-gradient(from 45deg at 25% 25%, 
+        transparent 0deg, 
+        rgba(var(--romanian-red), 0.2) 45deg, 
+        transparent 90deg),
+      repeating-conic-gradient(from 45deg at 75% 75%, 
+        transparent 0deg, 
+        rgba(var(--romanian-blue), 0.2) 45deg, 
+        transparent 90deg);
+    
+    background-size: 80px 80px, 40px 40px, 40px 40px;
+    background-position: 0 0, 0 0, 40px 40px;
+  }
+  
+  .romanian-card-border {
+    position: relative;
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(45deg, rgb(var(--romanian-blue)), rgb(var(--romanian-yellow)), rgb(var(--romanian-red))) border-box;
+  }
+  
+  .romanian-card-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, rgb(var(--romanian-blue)), rgb(var(--romanian-yellow)), rgb(var(--romanian-red)));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.3;
+  }
 }
 
 /* Custom animations */
