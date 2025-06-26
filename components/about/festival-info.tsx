@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calendar, Users, Music, Heart } from 'lucide-react';
+import { Calendar, Users, Music, Heart, Baby, Gamepad2, Palette } from 'lucide-react';
 
 export function FestivalInfo() {
   return (
@@ -89,6 +89,94 @@ export function FestivalInfo() {
         </Card>
       </div>
 
+      {/* Kids Activities Section */}
+      <Card className="bg-gradient-to-r from-blue-50 to-yellow-50 border-romanian-blue/20">
+        <CardHeader className="text-center">
+          <CardTitle className="text-2xl text-romanian-blue flex items-center justify-center gap-2">
+            <Baby className="w-8 h-8" />
+            Kids Are Welcome!
+          </CardTitle>
+          <p className="text-lg text-gray-700 font-medium">
+            A Family-Friendly Festival with Fun Activities for Children
+          </p>
+        </CardHeader>
+        <CardContent>
+          <p className="text-center text-gray-600 mb-6">
+            Bring the whole family! We have plenty of exciting activities to keep children 
+            entertained while parents enjoy authentic Romanian cuisine and culture.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-romanian-yellow/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">🏰</span>
+              </div>
+              <h4 className="font-semibold text-romanian-blue mb-2">Bounce House</h4>
+              <p className="text-sm text-gray-600">
+                Safe, supervised bouncing fun for kids of all ages
+              </p>
+            </div>
+
+            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-romanian-red/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Palette className="w-6 h-6 text-romanian-red" />
+              </div>
+              <h4 className="font-semibold text-romanian-blue mb-2">Face Painting</h4>
+              <p className="text-sm text-gray-600">
+                Professional artists creating magical designs and characters
+              </p>
+            </div>
+
+            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-romanian-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Gamepad2 className="w-6 h-6 text-romanian-blue" />
+              </div>
+              <h4 className="font-semibold text-romanian-blue mb-2">Interactive Games</h4>
+              <p className="text-sm text-gray-600">
+                Traditional games and activities for endless entertainment
+              </p>
+            </div>
+
+            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-romanian-yellow/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">⚽</span>
+              </div>
+              <h4 className="font-semibold text-romanian-blue mb-2">Soccer Field</h4>
+              <p className="text-sm text-gray-600">
+                Open field for soccer games and running around
+              </p>
+            </div>
+
+            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-romanian-red/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">🏸</span>
+              </div>
+              <h4 className="font-semibold text-romanian-blue mb-2">Badminton</h4>
+              <p className="text-sm text-gray-600">
+                Racquet sports for older children and teens
+              </p>
+            </div>
+
+            <div className="text-center p-4 bg-white rounded-lg shadow-sm">
+              <div className="w-12 h-12 bg-romanian-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-2xl">🎪</span>
+              </div>
+              <h4 className="font-semibold text-romanian-blue mb-2">More Fun</h4>
+              <p className="text-sm text-gray-600">
+                Additional activities and surprises throughout the day
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 p-4 bg-romanian-yellow/10 rounded-lg border border-romanian-yellow/30">
+            <p className="text-center text-gray-700 font-medium">
+              <span className="text-romanian-blue">👨‍👩‍👧‍👦 Family Tip:</span> All activities are supervised and designed to let parents 
+              relax and enjoy the festival while knowing their children are having a blast in a safe environment!
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* History Section */}
       <Card>
         <CardHeader>
@@ -96,9 +184,9 @@ export function FestivalInfo() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-gray-600">
-            The Romanian Food Festival began as a small church community gathering in the early 2000s, 
+            The Romanian Food Festival began as a small church community gathering in 2010, 
             when members of the Descent of the Holy Spirit & St. Theodora of Sihla Romanian Orthodox Church 
-            wanted to share their cultural heritage with the broader Rochester Hills community.
+            wanted to share their cultural heritage with the broader Michigan community.
           </p>
           <p className="text-gray-600">
             What started as a modest event in the church hall has grown into one of Michigan&apos;s most 

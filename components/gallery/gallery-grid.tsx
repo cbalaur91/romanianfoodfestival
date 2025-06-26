@@ -37,10 +37,66 @@ const galleryItems = [
     alt: 'Festival 2023',
     year: '2023',
     type: 'video'
+  },
+  {
+    id: 5,
+    src: '/videos/PresentationVideo2024.mp4',
+    videoSrc: '/videos/PresentationVideo2024.mp4',
+    alt: 'Presentation Video 2024',
+    year: '2024',
+    type: 'video'
+  },
+  {
+    id: 6,
+    src: '/videos/Dance1.mp4',
+    videoSrc: '/videos/Dance1.mp4',
+    alt: 'Group of dancers',
+    year: '2024',
+    type: 'video'
+  },
+  {
+    id: 7,
+    src: '/videos/Dance2.mp4',
+    videoSrc: '/videos/Dance2.mp4',
+    alt: 'Group of dancers',
+    year: '2024',
+    type: 'video'
+  },
+  {
+    id: 8,
+    src: '/videos/Dance3.mp4',
+    videoSrc: '/videos/Dance3.mp4',
+    alt: 'Group of dancers',
+    year: '2024',
+    type: 'video'
+  },
+  {
+    id: 9,
+    src: '/videos/Food.mp4',
+    videoSrc: '/videos/Food.mp4',
+    alt: 'Selection of food',
+    year: '2024',
+    type: 'video'
+  },
+  {
+    id: 10,
+    src: '/videos/Mici.mp4',
+    videoSrc: '/videos/Mici.mp4',
+    alt: 'Mici on the grill',
+    year: '2024',
+    type: 'video'
+  },
+  {
+    id: 11,
+    src: '/videos/CiorbaBurta.mp4',
+    videoSrc: '/videos/CiorbaBurta.mp4',
+    alt: 'Tripe Soup in a pot',
+    year: '2024',
+    type: 'video'
   }
 ];
 
-const years = ['All', '2024', '2023', '2022'];
+const years = ['All', '2024', '2023'];
 
 export default function GalleryGrid() {
   const [selectedYear, setSelectedYear] = useState('All');
@@ -95,14 +151,24 @@ export default function GalleryGrid() {
       className={`group relative aspect-square cursor-pointer overflow-hidden rounded-lg bg-gray-100 ${className || ''}`}
       onClick={() => openLightbox(item.id)}
     >
-      <Image
-        src={item.src}
-        alt={item.alt}
-        fill
-        sizes="(max-width: 768px) 80vw, (max-width: 1200px) 33vw, 25vw"
-        className="object-cover transition-transform duration-300 group-hover:scale-105"
-        loading="lazy"
-      />
+      {item.type === 'video' && !item.src.endsWith('.png') ? (
+        <video
+          src={item.src}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          muted
+          playsInline
+          preload="metadata"
+        />
+      ) : (
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          sizes="(max-width: 768px) 80vw, (max-width: 1200px) 33vw, 25vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+        />
+      )}
       
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />

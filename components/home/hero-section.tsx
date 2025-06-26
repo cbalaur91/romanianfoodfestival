@@ -9,12 +9,12 @@ import Image from 'next/image';
 const foodImages = [
   '/Food/sarmale.jpg',
   '/Food/mici.jpg',
-  '/Food/carnati.jpg',
-  '/Food/cartofi.jpg',
+  '/Food/pui-gratar.jpg',
+  '/Food/french-fries.jpg',
   '/Food/langosi.jpg',
   '/Food/kurtos.jpg',
   '/Food/iahnie.jpg',
-  '/Food/vin.jpg'
+  '/Food/must.jpg'
 ];
 
 export function HeroSection() {

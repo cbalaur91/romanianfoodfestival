@@ -45,7 +45,9 @@ export function Footer() {
             </h3>
             <div className="flex space-x-4 mb-4">
               <a
-                href="#"
+                href="https://www.facebook.com/share/15nRsacsTk/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 bg-romanian-blue text-white rounded-full hover:bg-opacity-80 transition-colors"
                 aria-label="Facebook"
               >
