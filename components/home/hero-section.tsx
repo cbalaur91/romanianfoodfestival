@@ -82,8 +82,8 @@ export function HeroSection() {
               {/* Massive Title for Split Layout */}
               <h1 className="text-7xl sm:text-8xl lg:text-9xl xl:text-[10rem] font-bold mb-8 leading-none">
                 <span className="block text-romanian-blue drop-shadow-sm">Romanian</span>
-                <span className="block text-romanian-yellow drop-shadow-sm -mt-4">Food</span>
-                <span className="block text-romanian-red drop-shadow-sm -mt-4">Festival</span>
+                <span className="block text-romanian-yellow drop-shadow-sm -mt-1 sm:-mt-2 lg:-mt-4">Food</span>
+                <span className="block text-romanian-red drop-shadow-sm -mt-1 sm:-mt-2 lg:-mt-4">Festival</span>
               </h1>
               
               {/* Year with Romanian flag accent */}
