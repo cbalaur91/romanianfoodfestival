@@ -7,8 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const foodImages = [
-  '/Food/sarmale.jpg',
   '/Food/mici.jpg',
+  '/Food/sarmale.jpg',
   '/Food/pui-gratar.jpg',
   '/Food/french-fries.jpg',
   '/Food/langosi.jpg',
