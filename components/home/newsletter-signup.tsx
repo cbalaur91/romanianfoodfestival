@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -9,9 +10,9 @@ import { Mail, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export function NewsletterSignup() {
+  const [state, handleSubmit] = useForm("xkgbkjbq");
   const [email, setEmail] = useState('');
   const [isConsented, setIsConsented] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const isEmailValid = (email: string): boolean => {
@@ -19,9 +20,22 @@ export function NewsletterSignup() {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Handle success state changes
+  useEffect(() => {
+    if (state.succeeded) {
+      setEmail('');
+      setIsConsented(false);
+      toast({
+        title: "Successfully subscribed!",
+        description: "Thank you for subscribing to our newsletter. You'll receive updates about the Romanian Food Festival.",
+      });
+    }
+  }, [state.succeeded, toast]);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Client-side validation for immediate feedback
     if (!isEmailValid(email) || !isConsented) {
       toast({
         title: "Missing information",
@@ -31,18 +45,8 @@ export function NewsletterSignup() {
       return;
     }
 
-    setIsLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      setEmail('');
-      setIsConsented(false);
-      toast({
-        title: "Successfully subscribed!",
-        description: "Thank you for subscribing to our newsletter. You'll receive updates about the Romanian Food Festival.",
-      });
-    }, 1000);
+    // Call Formspree's handleSubmit
+    await handleSubmit(e);
   };
 
   return (
@@ -60,10 +64,11 @@ export function NewsletterSignup() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
+          <form onSubmit={handleFormSubmit} className="max-w-md mx-auto space-y-4">
             <div className="flex flex-col sm:flex-row gap-3">
               <Input
                 type="email"
+                name="email"
                 placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -72,10 +77,10 @@ export function NewsletterSignup() {
               />
               <Button
                 type="submit"
-                disabled={isLoading || !isEmailValid(email) || !isConsented}
+                disabled={state.submitting || !isEmailValid(email) || !isConsented}
                 className="bg-romanian-blue hover:bg-romanian-blue/80 text-white px-8"
               >
-                {isLoading ? (
+                {state.submitting ? (
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <>
@@ -86,9 +91,17 @@ export function NewsletterSignup() {
               </Button>
             </div>
             
+            <ValidationError 
+              prefix="Email" 
+              field="email"
+              errors={state.errors}
+              className="text-red-500 text-sm"
+            />
+            
             <div className="flex items-start space-x-2 text-left">
               <Checkbox
                 id="consent"
+                name="consent"
                 checked={isConsented}
                 onCheckedChange={(checked) => setIsConsented(checked === true)}
                 disabled={!isEmailValid(email)}
@@ -102,6 +115,13 @@ export function NewsletterSignup() {
                 special offers, and festival updates. I understand I can unsubscribe at any time.
               </Label>
             </div>
+            
+            <ValidationError 
+              prefix="Consent" 
+              field="consent"
+              errors={state.errors}
+              className="text-red-500 text-sm"
+            />
           </form>
 
           <p className="text-xs text-gray-500 mt-4">

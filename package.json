@@ -10,6 +10,7 @@
     "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@hookform/resolvers": "^3.9.0",
     "@next/swc-wasm-nodejs": "^15.3.3",
     "@radix-ui/react-checkbox": "^1.1.1",
