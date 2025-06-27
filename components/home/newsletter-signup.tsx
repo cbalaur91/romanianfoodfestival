@@ -32,7 +32,7 @@ export function NewsletterSignup() {
     }
   }, [state.succeeded, toast]);
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     // Client-side validation for immediate feedback
