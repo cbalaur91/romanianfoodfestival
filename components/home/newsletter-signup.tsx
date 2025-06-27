@@ -16,8 +16,9 @@ export function NewsletterSignup() {
   const { toast } = useToast();
 
   const isEmailValid = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    // More robust email validation regex
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    return email.length <= 254 && emailRegex.test(email.trim());
   };
 
   // Handle success state changes
@@ -71,8 +72,9 @@ export function NewsletterSignup() {
                 name="email"
                 placeholder="Enter your email address"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.trim())}
                 className="flex-1 bg-white text-gray-900"
+                maxLength={254}
                 required
               />
               <Button

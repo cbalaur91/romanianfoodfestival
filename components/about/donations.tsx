@@ -131,15 +131,21 @@ export function Donations() {
               Get our donation letter with Venmo ID and mailing address for check donations. 
               Multiple convenient ways to support our mission. Contact us for any questions.
             </p>
-            <Button 
-              variant="secondary" 
-              size="lg"
-              onClick={handleDownloadLetter}
-              className="w-full"
-            >
-              <Download className="w-5 h-5 mr-2" />
-              Download Details
-            </Button>
+            <div className="relative group w-full">
+              <Button 
+                variant="secondary" 
+                size="lg"
+                disabled
+                className="w-full cursor-not-allowed opacity-75"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Download Details
+              </Button>
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
+                Coming soon! Please contact us directly for donation details.
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
