@@ -9,35 +9,170 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { ChevronLeft, ChevronRight, Filter, Play } from 'lucide-react';
 
 const galleryItems = [
+  // 2025 Images
   {
-    id: 1,
-    src: '/2023/1.jpg',
-    alt: 'Romanian traditional dance',
-    year: '2023',
-    type: 'image'
-  },
-  {
-    id: 2,
-    src: '/2023/12.jpg',
-    alt: 'Romanian traditional attire',
-    year: '2023',
-    type: 'image'
-  },
-  {
-    id: 3,
-    src: '/2023/2.JPG',
-    alt: 'Group of volunteers',
-    year: '2023',
-    type: 'image'
-  },
-  {
-    id: 4,
-    src: '/videos/RFF2023.png',
-    videoSrc: '/videos/PresentationVideo2023.mp4',
-    alt: 'Festival 2023',
-    year: '2023',
+    id: 34,
+    src: '/videos/PresentationVideo2025.mp4',
+    videoSrc: '/videos/PresentationVideo2025.mp4',
+    alt: 'Romanian Food Festival 2025',
+    year: '2025',
     type: 'video'
   },
+  {
+    id: 12,
+    src: '/2025/_MG_7087.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 13,
+    src: '/2025/_MG_7096.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 14,
+    src: '/2025/_MG_7155.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 15,
+    src: '/2025/_MG_7174.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 16,
+    src: '/2025/_MG_7183.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 17,
+    src: '/2025/_MG_7187.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 18,
+    src: '/2025/_MG_7190.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 19,
+    src: '/2025/_MG_7193.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 20,
+    src: '/2025/_MG_7204.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 21,
+    src: '/2025/_MG_7213.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 22,
+    src: '/2025/_MG_7216.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 23,
+    src: '/2025/_MG_7243.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 24,
+    src: '/2025/_MG_7250.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 25,
+    src: '/2025/_MG_7265.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 26,
+    src: '/2025/_MG_7270.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 27,
+    src: '/2025/_MG_7281.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 28,
+    src: '/2025/_MG_7300.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 29,
+    src: '/2025/_MG_7337.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 30,
+    src: '/2025/_MG_7344.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 31,
+    src: '/2025/_MG_7365.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 32,
+    src: '/2025/_MG_7375.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  {
+    id: 33,
+    src: '/2025/_MG_7376.JPG',
+    alt: 'Romanian Food Festival',
+    year: '2025',
+    type: 'image'
+  },
+  // 2024 Videos
   {
     id: 5,
     src: '/videos/PresentationVideo2024.mp4',
@@ -93,13 +228,43 @@ const galleryItems = [
     alt: 'Tripe Soup in a pot',
     year: '2024',
     type: 'video'
+  },
+  // 2023 Images and Videos
+  {
+    id: 1,
+    src: '/2023/1.jpg',
+    alt: 'Romanian traditional dance',
+    year: '2023',
+    type: 'image'
+  },
+  {
+    id: 2,
+    src: '/2023/12.jpg',
+    alt: 'Romanian traditional attire',
+    year: '2023',
+    type: 'image'
+  },
+  {
+    id: 3,
+    src: '/2023/2.JPG',
+    alt: 'Group of volunteers',
+    year: '2023',
+    type: 'image'
+  },
+  {
+    id: 4,
+    src: '/videos/RFF2023.png',
+    videoSrc: '/videos/PresentationVideo2023.mp4',
+    alt: 'Festival 2023',
+    year: '2023',
+    type: 'video'
   }
 ];
 
-const years = ['All', '2024', '2023'];
+const years = ['2025', '2024', '2023'];
 
 export default function GalleryGrid() {
-  const [selectedYear, setSelectedYear] = useState('All');
+  const [selectedYear, setSelectedYear] = useState('2025');
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [showFilters, setShowFilters] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -116,8 +281,7 @@ export default function GalleryGrid() {
   }, []);
 
   const filteredItems = galleryItems.filter(item => {
-    const yearMatch = selectedYear === 'All' || item.year === selectedYear;
-    return yearMatch;
+    return item.year === selectedYear;
   });
 
   const openLightbox = (id: number) => {
@@ -263,7 +427,7 @@ export default function GalleryGrid() {
             variant="outline"
             className="mt-4"
             onClick={() => {
-              setSelectedYear('All');
+              setSelectedYear('2025');
             }}
           >
             Clear Filters
