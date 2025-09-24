@@ -4,75 +4,131 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Calendar, MapPin, Clock } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
-
-const foodImages = [
-  '/Food/mici.jpg',
-  '/Food/sarmale.jpg',
-  '/Food/pui-gratar.jpg',
-  '/Food/french-fries.jpg',
-  '/Food/langosi.jpg',
-  '/Food/kurtos.jpg',
-  '/Food/iahnie.jpg',
-  '/Food/must.jpg'
-];
+import { loadSponsors, getRandomBackgroundClass, getTextColorClass, calculateTextSize, type Sponsor } from '@/lib/sponsors';
 
 export function HeroSection() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [sponsors, setSponsors] = useState<Sponsor[]>([]);
+  const [currentSponsorIndex, setCurrentSponsorIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
+    const initializeSponsors = async () => {
+      try {
+        const loadedSponsors = await loadSponsors();
+        setSponsors(loadedSponsors);
+      } catch (error) {
+        console.error('Failed to load sponsors:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initializeSponsors();
+  }, []);
+
+  useEffect(() => {
+    if (sponsors.length === 0) return;
+
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        prevIndex === foodImages.length - 1 ? 0 : prevIndex + 1
+      setCurrentSponsorIndex((prevIndex) =>
+        prevIndex === sponsors.length - 1 ? 0 : prevIndex + 1
       );
-    }, 4000); // Change image every 4 seconds
+    }, 4000); // Change sponsor every 4 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [sponsors.length]);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-r from-white via-gray-50 to-white">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-12 lg:py-0">
           
-          {/* Left Column - Hero Image Slideshow */}
+          {/* Left Column - Sponsor Text Slideshow */}
           <div className="relative order-2 lg:order-1">
-            <div className="relative aspect-[4/3] lg:aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl">
-              {/* Slideshow Images */}
-              {foodImages.map((image, index) => (
-                <Image
-                  key={image}
-                  src={image}
-                  alt="Traditional Romanian cuisine"
-                  fill
-                  className={`object-cover transition-opacity duration-1000 ${
-                    index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  priority={index === 0}
-                />
-              ))}
-              
+            <div className="relative min-h-[400px] lg:min-h-[500px] overflow-hidden rounded-2xl shadow-2xl">
+              {/* Loading State */}
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+                  <div className="text-center">
+                    <div className="w-8 h-8 border-4 border-romanian-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-gray-600 font-medium">Loading Sponsors...</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Sponsor Text Slides */}
+              {!isLoading && sponsors.map((sponsor, index) => {
+                const isActive = index === currentSponsorIndex;
+                const backgroundClass = getRandomBackgroundClass(index);
+                const textColorClass = getTextColorClass(index);
+                const textSizeClass = calculateTextSize(sponsor.displayText);
+
+                return (
+                  <div
+                    key={sponsor.id}
+                    className={`absolute inset-0 flex items-center justify-center p-8 transition-all duration-1000 ease-in-out ${backgroundClass} ${
+                      isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                    }`}
+                    role="tabpanel"
+                    aria-hidden={!isActive}
+                    aria-label={`Sponsor: ${sponsor.name}`}
+                  >
+                    <div className="text-center max-w-full">
+                      <div className={`font-bold leading-tight tracking-wide ${textSizeClass} ${textColorClass} drop-shadow-sm transition-all duration-500 transform ${
+                        isActive ? 'translate-y-0' : 'translate-y-4'
+                      }`}>
+                        <div className="flex items-center justify-center mb-2">
+                          <div className="w-12 h-0.5 bg-romanian-flag mr-4"></div>
+                          <span className="text-sm font-medium text-gray-500 uppercase tracking-widest">Thank You</span>
+                          <div className="w-12 h-0.5 bg-romanian-flag ml-4"></div>
+                        </div>
+
+                        <div className="break-words hyphens-auto" lang="en">
+                          {sponsor.displayText}
+                        </div>
+
+                        <div className="mt-4 flex items-center justify-center">
+                          <div className="w-8 h-0.5 bg-current opacity-30"></div>
+                          <div className="mx-2 w-2 h-2 rounded-full bg-current opacity-50"></div>
+                          <div className="w-8 h-0.5 bg-current opacity-30"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+
               {/* Romanian flag accent overlay */}
               <div className="absolute top-0 left-0 w-full h-2 bg-romanian-flag"></div>
               <div className="absolute bottom-0 right-0 w-2 h-full bg-gradient-to-t from-romanian-red via-romanian-yellow to-romanian-blue"></div>
             </div>
-            
+
             {/* Slideshow Indicators */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-              {foodImages.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentImageIndex ? 'bg-romanian-yellow scale-125' : 'bg-white/60 hover:bg-white/80'
-                  }`}
-                  onClick={() => setCurrentImageIndex(index)}
-                  aria-label={`Go to image ${index + 1}`}
-                />
-              ))}
-            </div>
-            
-            {/* Decorative Romanian pattern behind image */}
+            {!isLoading && sponsors.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" role="tablist" aria-label="Sponsor navigation">
+                {sponsors.map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-romanian-yellow focus:ring-offset-2 ${
+                      index === currentSponsorIndex ? 'bg-romanian-yellow scale-125 shadow-lg' : 'bg-white/60 hover:bg-white/80 hover:scale-110'
+                    }`}
+                    onClick={() => setCurrentSponsorIndex(index)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setCurrentSponsorIndex(index);
+                      }
+                    }}
+                    role="tab"
+                    aria-selected={index === currentSponsorIndex}
+                    aria-label={`Go to sponsor ${index + 1}: ${sponsors[index]?.name || 'Unknown'}`}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* Decorative Romanian pattern behind container */}
             <div className="absolute -top-4 -left-4 -right-4 -bottom-4 traditional-pattern opacity-20 rounded-3xl -z-10"></div>
           </div>
           
