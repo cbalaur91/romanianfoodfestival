@@ -42,11 +42,11 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-r from-white via-gray-50 to-white">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-12 lg:py-0">
-          
-          {/* Left Column - Sponsor Text Slideshow */}
-          <div className="relative order-2 lg:order-1">
-            <div className="relative min-h-[400px] lg:min-h-[500px] overflow-hidden rounded-2xl shadow-2xl">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-center min-h-screen py-4 lg:py-0">
+
+          {/* Desktop: Left Column - Sponsor Text Slideshow (hidden on mobile) */}
+          <div className="relative hidden lg:block">
+            <div className="relative min-h-[500px] overflow-hidden rounded-2xl shadow-2xl">
               {/* Loading State */}
               {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
@@ -131,32 +131,116 @@ export function HeroSection() {
             {/* Decorative Romanian pattern behind container */}
             <div className="absolute -top-4 -left-4 -right-4 -bottom-4 traditional-pattern opacity-20 rounded-3xl -z-10"></div>
           </div>
-          
-          {/* Right Column - Content */}
-          <div className="relative order-1 lg:order-2 text-center lg:text-left">
+
+          {/* Main Content Column */}
+          <div className="relative lg:order-2 text-center lg:text-left">
             <div className="animate-fade-in-up">
               {/* Massive Title for Split Layout */}
-              <h1 className="text-7xl sm:text-8xl lg:text-9xl xl:text-[10rem] font-bold mb-8 leading-none">
+              <h1 className="text-5xl sm:text-7xl lg:text-9xl xl:text-[10rem] font-bold mb-6 lg:mb-8 leading-none">
                 <span className="block text-romanian-blue drop-shadow-sm">Romanian</span>
                 <span className="block text-romanian-yellow drop-shadow-sm -mt-1 sm:-mt-2 lg:-mt-4">Food</span>
                 <span className="block text-romanian-red drop-shadow-sm -mt-1 sm:-mt-2 lg:-mt-4">Festival</span>
               </h1>
               
               {/* Year with Romanian flag accent */}
-              <div className="flex items-center justify-center lg:justify-start mb-8">
+              <div className="flex items-center justify-center lg:justify-start mb-6 lg:mb-8">
                 <div className="bg-romanian-flag h-1 w-16 mr-4"></div>
                 <span className="text-4xl sm:text-5xl lg:text-6xl font-light text-gray-700">
                   {currentYear}
                 </span>
                 <div className="bg-romanian-flag h-1 w-16 ml-4"></div>
               </div>
+
+              {/* Mobile: Sponsor Text Slideshow (positioned after year) */}
+              <div className="relative lg:hidden mb-8">
+                <div className="relative min-h-[200px] overflow-hidden rounded-xl shadow-lg">
+                  {/* Loading State */}
+                  {isLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+                      <div className="text-center">
+                        <div className="w-6 h-6 border-4 border-romanian-blue border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                        <p className="text-gray-600 text-sm font-medium">Loading Sponsors...</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Sponsor Text Slides */}
+                  {!isLoading && sponsors.map((sponsor, index) => {
+                    const isActive = index === currentSponsorIndex;
+                    const backgroundClass = getRandomBackgroundClass(index);
+                    const textColorClass = getTextColorClass(index);
+
+                    return (
+                      <div
+                        key={sponsor.id}
+                        className={`absolute inset-0 flex items-center justify-center p-4 transition-all duration-1000 ease-in-out ${backgroundClass} ${
+                          isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+                        }`}
+                        role="tabpanel"
+                        aria-hidden={!isActive}
+                        aria-label={`Sponsor: ${sponsor.name}`}
+                      >
+                        <div className="text-center max-w-full">
+                          <div className={`font-bold leading-tight tracking-wide text-lg ${textColorClass} drop-shadow-sm transition-all duration-500 transform ${
+                            isActive ? 'translate-y-0' : 'translate-y-4'
+                          }`}>
+                            <div className="flex items-center justify-center mb-1">
+                              <div className="w-8 h-0.5 bg-romanian-flag mr-2"></div>
+                              <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">Thank You</span>
+                              <div className="w-8 h-0.5 bg-romanian-flag ml-2"></div>
+                            </div>
+
+                            <div className="break-words hyphens-auto" lang="en">
+                              {sponsor.displayText}
+                            </div>
+
+                            <div className="mt-2 flex items-center justify-center">
+                              <div className="w-6 h-0.5 bg-current opacity-30"></div>
+                              <div className="mx-1 w-1.5 h-1.5 rounded-full bg-current opacity-50"></div>
+                              <div className="w-6 h-0.5 bg-current opacity-30"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {/* Romanian flag accent overlay */}
+                  <div className="absolute top-0 left-0 w-full h-1 bg-romanian-flag"></div>
+                  <div className="absolute bottom-0 right-0 w-1 h-full bg-gradient-to-t from-romanian-red via-romanian-yellow to-romanian-blue"></div>
+                </div>
+
+                {/* Mobile Slideshow Indicators */}
+                {!isLoading && sponsors.length > 1 && (
+                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1" role="tablist" aria-label="Sponsor navigation">
+                    {sponsors.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-1 focus:ring-romanian-yellow focus:ring-offset-1 ${
+                          index === currentSponsorIndex ? 'bg-romanian-yellow scale-125 shadow-lg' : 'bg-white/60 hover:bg-white/80 hover:scale-110'
+                        }`}
+                        onClick={() => setCurrentSponsorIndex(index)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setCurrentSponsorIndex(index);
+                          }
+                        }}
+                        role="tab"
+                        aria-selected={index === currentSponsorIndex}
+                        aria-label={`Go to sponsor ${index + 1}: ${sponsors[index]?.name || 'Unknown'}`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
               
-              <p className="text-xl sm:text-2xl lg:text-3xl mb-12 text-gray-700 font-medium max-w-2xl mx-auto lg:mx-0">
+              <p className="text-lg sm:text-xl lg:text-3xl mb-8 lg:mb-12 text-gray-700 font-medium max-w-2xl mx-auto lg:mx-0">
                 Experience authentic Romanian cuisine and culture at our annual celebration
               </p>
               
               {/* Event Details - Horizontal Layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
                 <div className="romanian-card-border bg-white rounded-xl p-6 shadow-lg">
                   <Calendar className="w-6 h-6 text-romanian-red mx-auto lg:mx-0 mb-3" />
                   <div className="text-gray-800">
