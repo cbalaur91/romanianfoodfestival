@@ -58,3 +58,18 @@ Review notes: tab value `sponsorship`→`sponsors` so value == query param (noth
 Result: tsc, lint, 13 tests clean; node build (scratch copy) keeps /contact static (○). Rendered /contact body: "Rochester Hills" ×1 (church card, labelled), 0 "donat", only external hrefs = maps.app.goo.gl directions, FB, IG, aiwebhub; directions is an `<a>`. Screenshots contact + footer 1440/390: ~/rff-shots/i5-*.png.
 Review fixes: footer line now "Festival location: Armonia Event Hall, 31500 Ryan Rd, Warren, MI 48092" (under the church-name heading a bare address read as the church's); pin icon `shrink-0`/top-aligned for the wrap; directions copy "indoors" gated on `event.indoors`.
 For owner / later: General Questions card still says "tickets" (admission free) → #7 sweep; church address hardcoded in contact-info (not a festival fact, by spec); `venue.name + venueAddress` + directions anchor now repeated in 4 components (banner, hero, facts, contact) — extraction not done. Flagged, not deleted: unused `Clock`/`Facebook`/`Instagram` imports in contact-info. `/contact` + root `<head>` still say Rochester Hills → #6.
+
+## Issue #6 — Metadata and Event structured data for 2026 / Warren
+
+1. [x] Tests first: `shortDateRange` "Sept 19–20"; `eventJsonLd` start/end -04:00, Warren PostalAddress, free, organizer, absolute poster image → verify: `bun test` red, then green
+2. [x] `lib/event.ts`: `siteUrl`, `shortDateRange`, `eventJsonLd` built from config → verify: `bun test` green, tsc clean
+3. [x] Root metadata from config: title "Romanian Food Festival | Sept 19–20, 2026 · Warren, MI", description/OG/Twitter/keywords, `metadataBase` → verify: rendered `<head>`
+4. [x] Share image: `RFF.png` itself shows 2025 / Sept 20-21 / Rochester Hills → OG + Twitter image = 2026 poster (real dims, alt) → verify: rendered og:image absolute on live domain
+5. [x] JSON-LD `<script>` on home page only → verify: exactly one block in rendered `/`, parses, values match
+6. [x] Sweep rendered `<head>` of all routes for "2025"/"20-21"/"Rochester Hills" → verify: 0 hits
+7. [x] Typecheck, lint, tests, node build → verify: all pass
+8. [x] /code-review, commit to `festival-2026`
+
+Result: 20 tests pass (UTC + Auckland); tsc, lint, node build (scratch copy) clean, all routes static. Rendered `/` head: title "Romanian Food Festival | Sept 19–20, 2026 · Warren, MI", description/OG/Twitter from config, og:image `https://www.romanianfoodfestival.org/AFIS/afis-2026.jpg`; exactly 1 Event JSON-LD block (start 2026-09-19T12:00:00-04:00, end 2026-09-20T19:00:00-04:00, Warren PostalAddress, free, church organizer). /about, /contact, /gallery heads: 0 hits for "2025"/"20-21"/"Rochester Hills".
+Review fixes: tests assert literal URL/organizer (were tautological); poster alt extracted to `posterAlt` in config, shared by lightbox + share cards.
+For owner / later: share image swapped `RFF.png` → 2026 poster (RFF.png is a screenshot showing 2025 / Sept 20-21 / Rochester Hills); poster is portrait, so X/Facebook large cards crop it — a 1200×630 2026 share image is a Release B item. Child pages inherit the home OG/Twitter card (no per-page og, canonical out of scope). JSON-LD omits `performer` (not in spec; config has it). `RFF.png` now unreferenced — not deleted.
