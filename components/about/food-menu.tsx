@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Eye } from 'lucide-react';
 import Image from 'next/image';
+import { event } from '@/lib/event';
 
 // Map dish names to actual food images
 const dishImages: { [key: string]: string } = {
@@ -50,6 +51,8 @@ const itemsWithoutImages = [
   'Beer IPA (pitcher)'
 ];
 
+// NOTE: `price` is not rendered (prices are posted at the festival); the empty
+// fields are kept for a Release B decision.
 const menuCategories = [
   {
     name: 'Soups',
@@ -154,6 +157,9 @@ export function FoodMenu() {
         <h2 className="text-3xl font-bold text-romanian-blue mb-4">
           Authentic Romanian Menu
         </h2>
+        <p className="font-semibold text-romanian-blue mb-4">
+          Prices posted at the festival · {event.toGoNote}
+        </p>
         <p className="text-gray-600 max-w-3xl mx-auto">
           Our menu features traditional Romanian dishes prepared with authentic recipes 
           passed down through generations. Each dish is made with care using fresh, 
@@ -196,9 +202,6 @@ export function FoodMenu() {
                         </Button>
                       )}
                     </div>
-                    <span className="font-bold text-romanian-red whitespace-nowrap">
-                      {item.price}
-                    </span>
                   </div>
                 ))}
               </CardContent>
@@ -239,9 +242,6 @@ export function FoodMenu() {
                         </Button>
                       )}
                     </div>
-                    <span className="font-bold text-romanian-red whitespace-nowrap">
-                      {item.price}
-                    </span>
                   </div>
                 ))}
               </CardContent>

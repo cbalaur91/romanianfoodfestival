@@ -3,7 +3,7 @@ import { AboutTabs } from '@/components/about/about-tabs';
 
 export const metadata: Metadata = {
   title: 'About | Romanian Food Festival',
-  description: 'Learn about the Romanian Food Festival, our history, food menu, sponsorship opportunities, and admission details.',
+  description: 'Learn about the Romanian Food Festival, our history, food menu, and sponsorship opportunities.',
 };
 
 export default function AboutPage() {
@@ -16,7 +16,7 @@ export default function AboutPage() {
           </h1>
           <p className="text-xl max-w-3xl mx-auto">
             Discover the rich traditions, authentic flavors, and vibrant culture 
-            of Romania at our annual celebration in Rochester Hills.
+            of Romania at our annual celebration.
           </p>
         </div>
       </div>
