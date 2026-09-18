@@ -2,17 +2,27 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Calendar, MapPin, Clock } from 'lucide-react';
+import { Calendar, MapPin, Clock, Ticket, Navigation } from 'lucide-react';
 import Link from 'next/link';
 import { loadSponsors, getRandomBackgroundClass, getTextColorClass, calculateTextSize, type Sponsor } from '@/lib/sponsors';
+import { event, eventYear, dateRange, dayHours, getEventPhase, type EventPhase } from '@/lib/event';
+import { EventPoster } from '@/components/home/event-poster';
 
 export function HeroSection() {
   const [sponsors, setSponsors] = useState<Sponsor[]>([]);
   const [currentSponsorIndex, setCurrentSponsorIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const currentYear = new Date().getFullYear();
+  // Static page: phase is checked in the browser, dates show until then.
+  const [phase, setPhase] = useState<EventPhase | null>(null);
 
   useEffect(() => {
+    setPhase(getEventPhase(new Date()));
+  }, []);
+
+  useEffect(() => {
+    // Slideshow is hidden until the 2026 sponsor list is confirmed; don't fetch it.
+    if (!event.showSponsors) return;
+
     const initializeSponsors = async () => {
       try {
         const loadedSponsors = await loadSponsors();
@@ -42,9 +52,10 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-r from-white via-gray-50 to-white">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-center min-h-screen py-4 lg:py-0">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-16 items-center min-h-screen py-4 lg:py-12">
 
           {/* Desktop: Left Column - Sponsor Text Slideshow (hidden on mobile) */}
+          {event.showSponsors && (
           <div className="relative hidden lg:block">
             <div className="relative min-h-[500px] overflow-hidden rounded-2xl shadow-2xl">
               {/* Loading State */}
@@ -131,6 +142,7 @@ export function HeroSection() {
             {/* Decorative Romanian pattern behind container */}
             <div className="absolute -top-4 -left-4 -right-4 -bottom-4 traditional-pattern opacity-20 rounded-3xl -z-10"></div>
           </div>
+          )}
 
           {/* Main Content Column */}
           <div className="relative lg:order-2 text-center lg:text-left">
@@ -146,12 +158,13 @@ export function HeroSection() {
               <div className="flex items-center justify-center lg:justify-start mb-6 lg:mb-8">
                 <div className="bg-romanian-flag h-1 w-16 mr-4"></div>
                 <span className="text-4xl sm:text-5xl lg:text-6xl font-light text-gray-700">
-                  {currentYear}
+                  {eventYear}
                 </span>
                 <div className="bg-romanian-flag h-1 w-16 ml-4"></div>
               </div>
 
               {/* Mobile: Sponsor Text Slideshow (positioned after year) */}
+              {event.showSponsors && (
               <div className="relative lg:hidden mb-8">
                 <div className="relative min-h-[200px] overflow-hidden rounded-xl shadow-lg">
                   {/* Loading State */}
@@ -234,47 +247,83 @@ export function HeroSection() {
                   </div>
                 )}
               </div>
-              
+              )}
+
               <p className="text-lg sm:text-xl lg:text-3xl mb-8 lg:mb-12 text-gray-700 font-medium max-w-2xl mx-auto lg:mx-0">
                 Experience authentic Romanian cuisine and culture at our annual celebration
               </p>
               
               {/* Event Details - Horizontal Layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mb-8 lg:mb-12">
                 <div className="romanian-card-border bg-white rounded-xl p-6 shadow-lg">
                   <Calendar className="w-6 h-6 text-romanian-red mx-auto lg:mx-0 mb-3" />
                   <div className="text-gray-800">
-                    <p className="font-bold text-lg">September 20-21</p>
-                    <p className="text-sm text-gray-600">{currentYear}</p>
+                    {phase === 'after' ? (
+                      <>
+                        <p className="font-bold text-lg">Thank you for coming!</p>
+                        <p className="text-sm text-gray-600">See you next year</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="font-bold text-lg">{dateRange}</p>
+                        <p className="text-sm text-gray-600">{eventYear}</p>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="romanian-card-border bg-white rounded-xl p-6 shadow-lg">
                   <Clock className="w-6 h-6 text-romanian-blue mx-auto lg:mx-0 mb-3" />
-                  <div className="text-gray-800">
-                    <p className="font-bold text-lg">12 PM - 7 PM</p>
-                    <p className="text-sm text-gray-600">Both Days</p>
+                  <div className="text-gray-800 space-y-1">
+                    {dayHours.map(({ day, hours }) => (
+                      <p key={day}>
+                        <span className="font-bold">{day}</span>{' '}
+                        <span className="text-gray-600">{hours}</span>
+                      </p>
+                    ))}
                   </div>
                 </div>
                 <div className="romanian-card-border bg-white rounded-xl p-6 shadow-lg">
                   <MapPin className="w-6 h-6 text-romanian-yellow mx-auto lg:mx-0 mb-3" />
                   <div className="text-gray-800">
-                    <p className="font-bold text-lg">Rochester Hills</p>
-                    <p className="text-sm text-gray-600">Michigan</p>
+                    <p className="font-bold text-lg">{event.venue.name}</p>
+                    <p className="text-sm text-gray-600">
+                      {event.venue.city}, {event.venue.region}
+                      {event.indoors && ' · Indoors'}
+                    </p>
                   </div>
                 </div>
+                {event.freeAdmission && (
+                  <div className="romanian-card-border bg-white rounded-xl p-6 shadow-lg">
+                    <Ticket className="w-6 h-6 text-romanian-red mx-auto lg:mx-0 mb-3" />
+                    <div className="text-gray-800">
+                      <p className="font-bold text-lg">Free Entrance</p>
+                      <p className="text-sm text-gray-600">No admission charge</p>
+                    </div>
+                  </div>
+                )}
               </div>
-              
+
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
                 <Button asChild size="lg" className="bg-romanian-red hover:bg-romanian-red/80 text-white text-xl px-10 py-6 rounded-xl shadow-xl">
-                  <Link href="/about">Learn More</Link>
+                  <a href={event.directionsUrl} target="_blank" rel="noopener noreferrer">
+                    <Navigation className="w-5 h-5 mr-2" aria-hidden="true" />
+                    Get Directions
+                  </a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="bg-transparent text-romanian-blue border-2 border-romanian-blue hover:bg-romanian-blue hover:text-white text-xl px-10 py-6 rounded-xl shadow-xl transition-all">
-                  <Link href="/gallery">View Gallery</Link>
+                  <Link href="/about?tab=menu">See the Menu</Link>
                 </Button>
               </div>
             </div>
           </div>
+
+          {/* Poster: desktop left column; on mobile it follows the facts and buttons */}
+          {!event.showSponsors && (
+            <div className="relative lg:order-1 w-full max-w-md mx-auto lg:max-w-none pb-8 lg:pb-0">
+              <EventPoster />
+            </div>
+          )}
         </div>
       </div>
       
