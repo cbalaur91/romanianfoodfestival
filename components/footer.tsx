@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
+import { event, venueAddress } from '@/lib/event';
 
 export function Footer() {
   return (
@@ -17,10 +18,10 @@ export function Footer() {
               Romanian Food Festival
             </p>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-romanian-red" />
+              <div className="flex items-start space-x-2">
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-romanian-red" />
                 <span className="text-sm text-gray-600">
-                  1808 School Rd. Rochester Hills, Michigan
+                  Festival location: {event.venue.name}, {venueAddress}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
