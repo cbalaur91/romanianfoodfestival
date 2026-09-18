@@ -69,6 +69,11 @@ describe('facts', () => {
     expect(event.freeAdmission).toBe(true);
   });
 
+  test('poster is a 2026-specific file, never last year\'s filenames', () => {
+    expect(event.poster.src).toContain(String(event.year));
+    expect(event.poster.src).not.toMatch(/afis-(en|ro)\./);
+  });
+
   test('show-sponsors flag is off', () => {
     expect(event.showSponsors).toBe(false);
   });

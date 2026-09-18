@@ -29,6 +29,8 @@ export const event = {
   ],
   organizer:
     'Descent of the Holy Spirit & St. Theodora of Sihla Romanian Orthodox Church',
+  // New filename every year so browser/CDN caches can never serve an old poster.
+  poster: { src: '/AFIS/afis-2026.jpg', width: 1206, height: 1501 },
   showSponsors: false,
 } as const;
 
