@@ -43,3 +43,18 @@ Review notes: remaining home-page "Rochester Hills"/"20-21" hits are root metada
 
 Result: tsc, lint, 13 tests clean; node build (scratch copy) keeps /about static (○). Browser via CDP (dev :3000): tabs exactly Festival/Menu/Sponsors; `tab=menu`→Menu, `sponsors`→Sponsors, none/`junk`/`constructor`/`MENU`→Festival; no "donat", no kids block, performers present, prices/to-go line under heading, 0 price spans, 34 menu items. Screenshots: ~/rff-shots/i4-*.png.
 Review notes: tab value `sponsorship`→`sponsors` so value == query param (nothing linked to the old value). Hero subtitle "in Rochester Hills" dropped (beyond metadata, needed for #7 sweep). `/about` rendered head still has "Rochester Hills" via root layout og/twitter/keywords → #6; re-check after it lands. Still for owner: history copy "beloved tradition in the Rochester Hills community" (festival-info) will hit #7 sweep; "DJ Oli & Orga · DJ" repeats DJ (config role, shared with home facts); `?tab=menu` hard load flashes Festival until hydration (static HTML). Flagged, not deleted: `donations.tsx`, menu `price: ''` fields.
+
+## Issue #5 — Contact page and footer: Warren everywhere
+
+1. [x] No new test: `venueAddress` + `directionsUrl` already covered in `lib/event.test.ts` (only seam) → verify: `bun test` green
+2. [x] Footer address → `venueAddress` from config → verify: rendered HTML has "31500 Ryan Rd, Warren, MI 48092", no "School Rd"
+3. [x] Contact directions: `window.open` handler → `<Button asChild><a href={event.directionsUrl}>`; copy names Warren venue; drop orphaned `'use client'` → verify: rendered `<a href="https://maps.app.goo.gl/...">`, grep no `window.open`/`onClick`
+4. [x] Church block: church address, labelled "not the festival location", plain text (no link) → verify: rendered body has "Rochester Hills" exactly once, inside church card; no `href` to Rochester Hills
+5. [x] "Sponsorship & Donations" → "Sponsorship", copy sponsorship/partnership only → verify: rendered contact HTML no "donat"
+6. [x] Phones/email/socials untouched → verify: diff
+7. [x] Typecheck, lint, tests, node build; screenshots contact 1440/390 → verify: all pass
+8. [x] /code-review, commit to `festival-2026`
+
+Result: tsc, lint, 13 tests clean; node build (scratch copy) keeps /contact static (○). Rendered /contact body: "Rochester Hills" ×1 (church card, labelled), 0 "donat", only external hrefs = maps.app.goo.gl directions, FB, IG, aiwebhub; directions is an `<a>`. Screenshots contact + footer 1440/390: ~/rff-shots/i5-*.png.
+Review fixes: footer line now "Festival location: Armonia Event Hall, 31500 Ryan Rd, Warren, MI 48092" (under the church-name heading a bare address read as the church's); pin icon `shrink-0`/top-aligned for the wrap; directions copy "indoors" gated on `event.indoors`.
+For owner / later: General Questions card still says "tickets" (admission free) → #7 sweep; church address hardcoded in contact-info (not a festival fact, by spec); `venue.name + venueAddress` + directions anchor now repeated in 4 components (banner, hero, facts, contact) — extraction not done. Flagged, not deleted: unused `Clock`/`Facebook`/`Instagram` imports in contact-info. `/contact` + root `<head>` still say Rochester Hills → #6.
