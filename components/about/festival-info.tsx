@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar, Users, Music, Heart, Baby, Gamepad2, Palette } from 'lucide-react';
+import { event } from '@/lib/event';
 
 export function FestivalInfo() {
   return (
@@ -70,9 +71,11 @@ export function FestivalInfo() {
             <CardTitle className="text-lg">Live Entertainment</CardTitle>
           </CardHeader>
           <CardContent className="text-center">
-            <p className="text-gray-600">
-              Traditional Romanian folk music and dance performances
-            </p>
+            {event.performers.map(({ name, role }) => (
+              <p key={name} className="text-gray-600">
+                <span className="font-semibold">{name}</span> · {role}
+              </p>
+            ))}
           </CardContent>
         </Card>
 
@@ -89,7 +92,8 @@ export function FestivalInfo() {
         </Card>
       </div>
 
-      {/* Kids Activities Section */}
+      {/* Kids Activities Section — hidden for the indoor 2026 festival (no
+          bounce house / soccer field / badminton). To restore: uncomment.
       <Card className="bg-gradient-to-r from-blue-50 to-yellow-50 border-romanian-blue/20">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl text-romanian-blue flex items-center justify-center gap-2">
@@ -176,6 +180,7 @@ export function FestivalInfo() {
           </div>
         </CardContent>
       </Card>
+      */}
 
       {/* History Section */}
       <Card>

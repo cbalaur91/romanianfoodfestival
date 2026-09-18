@@ -29,3 +29,17 @@ Review notes: banner shows until hydration after the end (fail-safe, by spec); t
 
 Result: 13 tests pass (UTC + Auckland); tsc, lint, node build (in scratch copy) clean. Browser via CDP: flag off → no `/sponsors/sponsorslist.txt` request, no "Loading Sponsors", poster left column at 1440, below "See the Menu" at 390 (1312 vs 1288 px); flag on → slideshow + request return, poster gone; lightbox opens; clock at Sun 7:00 PM EDT → "Thank you for coming!", banner gone. Screenshots: ~/rff-shots/i3-*.png.
 Review notes: remaining home-page "Rochester Hills"/"20-21" hits are root metadata (#6) and footer (#5). Poster keeps `priority` (desktop LCP; mobile preloads it below fold). Hero "Romanian" title clips at 1440 — pre-existing, Release B. 2025 `afis-en/ro.jpg` + `AFIS-EN/RO.pdf` now unreferenced — delete is owner's call (spec: unused assets → Release B). Not extracted: shared `useEventPhase` hook (hero + banner duplicate 4 lines).
+
+## Issue #4 — About page: no donations, menu deep-link, indoor-accurate content
+
+1. [x] Tabs → Festival | Menu | Sponsors; drop Donations trigger/content/import; `donations.tsx` stays (flagged) → verify: grep no importer, rendered HTML no "donat"
+2. [x] Initial tab from `?tab=` via `useSearchParams` inside Suspense (fallback = Festival tabs, so static HTML keeps content) → verify: node build passes; browser `tab=menu|sponsors|junk|none`
+3. [x] Kids' activities block commented out (icon imports kept, restore = uncomment) → verify: rendered HTML no "Bounce House"
+4. [x] Live Entertainment card names performers from `event.performers` → verify: rendered HTML
+5. [x] Menu: price spans removed, items unchanged; "Prices posted at the festival · dine in or take it to go" under heading → verify: rendered HTML, diff of menu data empty
+6. [x] Metadata: no "Rochester Hills"/"admission details"; hero subtitle drops "in Rochester Hills" → verify: rendered `<title>`/description
+7. [x] Typecheck, lint, tests, node build → verify: all pass
+8. [x] /code-review, commit to `festival-2026`
+
+Result: tsc, lint, 13 tests clean; node build (scratch copy) keeps /about static (○). Browser via CDP (dev :3000): tabs exactly Festival/Menu/Sponsors; `tab=menu`→Menu, `sponsors`→Sponsors, none/`junk`/`constructor`/`MENU`→Festival; no "donat", no kids block, performers present, prices/to-go line under heading, 0 price spans, 34 menu items. Screenshots: ~/rff-shots/i4-*.png.
+Review notes: tab value `sponsorship`→`sponsors` so value == query param (nothing linked to the old value). Hero subtitle "in Rochester Hills" dropped (beyond metadata, needed for #7 sweep). `/about` rendered head still has "Rochester Hills" via root layout og/twitter/keywords → #6; re-check after it lands. Still for owner: history copy "beloved tradition in the Rochester Hills community" (festival-info) will hit #7 sweep; "DJ Oli & Orga · DJ" repeats DJ (config role, shared with home facts); `?tab=menu` hard load flashes Festival until hydration (static HTML). Flagged, not deleted: `donations.tsx`, menu `price: ''` fields.
