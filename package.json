@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "bun test",
     "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
@@ -42,6 +43,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^15.3.3"
+    "@next/bundle-analyzer": "^15.3.3",
+    "@types/bun": "^1.4.2"
   }
 }

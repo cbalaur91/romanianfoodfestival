@@ -5,6 +5,7 @@ import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { ScrollToTop } from '@/components/scroll-to-top';
+import { LocationBanner } from '@/components/location-banner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <LocationBanner />
         <Navigation />
         <main className="min-h-screen">
           {children}

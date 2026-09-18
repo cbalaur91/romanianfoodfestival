@@ -49,7 +49,7 @@ export function Navigation() {
     <nav
       ref={navRef}
       className={cn(
-        'fixed top-0 w-full z-50 transition-all duration-300',
+        'sticky top-0 w-full z-50 transition-all duration-300',
         isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-md'
           : 'bg-transparent'
@@ -77,7 +77,7 @@ export function Navigation() {
                   'text-sm font-medium transition-colors hover:text-primary',
                   pathname === item.href
                     ? 'text-primary border-b-2 border-primary'
-                    : 'text-grey-700'
+                    : 'text-gray-700'
                 )}
               >
                 {item.name}
@@ -91,7 +91,7 @@ export function Navigation() {
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
-              aria-expanded="false"
+              aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
@@ -106,7 +106,7 @@ export function Navigation() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden absolute inset-x-0 top-full">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
             {navigation.map((item) => (
               <Link
