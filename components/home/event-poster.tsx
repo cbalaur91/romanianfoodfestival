@@ -3,9 +3,7 @@
 import Image from 'next/image';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden';
-import { event, eventYear, dateRange } from '@/lib/event';
-
-const alt = `${eventYear} Romanian Food Festival poster: ${dateRange}, ${event.indoors ? `held indoors ${event.rainReason.toLowerCase()} ` : ''}at ${event.venue.name}, ${event.venue.city}, ${event.venue.region}${event.freeAdmission ? '; free entrance' : ''}`;
+import { event, eventYear, posterAlt as alt } from '@/lib/event';
 
 export function EventPoster() {
   const { src, width, height } = event.poster;

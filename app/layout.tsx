@@ -6,32 +6,37 @@ import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { ScrollToTop } from '@/components/scroll-to-top';
 import { LocationBanner } from '@/components/location-banner';
+import { event, eventYear, eventSummary, posterAlt, shortDateRange, siteUrl } from '@/lib/event';
 
 const inter = Inter({ subsets: ['latin'] });
 
+const title = `Romanian Food Festival | ${shortDateRange}, ${eventYear} · ${event.venue.city}, ${event.venue.region}`;
+
+// The 2026 poster, not /RFF.png: that image has the 2025 dates and old venue baked in.
+const shareImage = {
+  url: event.poster.src,
+  width: event.poster.width,
+  height: event.poster.height,
+  alt: posterAlt,
+};
+
 export const metadata: Metadata = {
-  title: 'Romanian Food Festival | Rochester Hills, Michigan',
-  description: 'Join us for the annual Romanian Food Festival hosted by the Descent of the Holy Spirit & St. Theodora of Sihla Romanian Orthodox Church in Rochester Hills, Michigan. Experience authentic Romanian cuisine, culture, and traditions.',
-  keywords: 'Romanian Food Festival, Rochester Hills, Romanian Orthodox Church, Romanian cuisine, cultural festival, Michigan events',
+  metadataBase: new URL(siteUrl),
+  title,
+  description: eventSummary,
+  keywords: `Romanian Food Festival, ${event.venue.city}, Romanian Orthodox Church, Romanian cuisine, cultural festival, Michigan events`,
   openGraph: {
-    title: 'Romanian Food Festival | Rochester Hills, Michigan',
-    description: 'Experience authentic Romanian cuisine and culture at our annual festival',
+    title,
+    description: eventSummary,
     type: 'website',
     locale: 'en_US',
-    images: [
-      {
-        url: '/RFF.png',
-        width: 1200,
-        height: 630,
-        alt: 'Romanian Food Festival 2025 - September 20-21, Rochester Hills Michigan',
-      },
-    ],
+    images: [shareImage],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Romanian Food Festival | Rochester Hills, Michigan',
-    description: 'Experience authentic Romanian cuisine and culture at our annual festival',
-    images: ['/RFF.png'],
+    title,
+    description: eventSummary,
+    images: [shareImage],
   },
 };
 
